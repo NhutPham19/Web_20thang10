@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- TASK 2: Canvas Hiệu ứng Nổ Hoa 3D, Mưa Hoa & Chạm Nở Hoa -->
+    <canvas id="petal-canvas"></canvas>
+
+    <!-- TASK 3: Đĩa nhạc xoay 3D ở góc màn hình -->
+    <button id="music-toggle" class="music-disc hidden" aria-label="Bật/Tắt nhạc" title="Chạm để Bật/Tắt nhạc">
+        <div class="disc-inner">
+            <span class="music-icon">🎵</span>
+        </div>
+    </button>
+    <audio id="bg-music" loop preload="auto"></audio>
+
+    <!-- TASK 3: Màn hình mở đầu - Quả cầu Hộp quà 3D -->
+    <section id="intro-screen" class="intro-screen">
+        <div class="ambient-glow"></div>
+        <div class="intro-box-wrapper" id="open-gift-btn">
+            <div class="crystal-orb">
+                <div class="orb-ring ring-1"></div>
+                <div class="orb-ring ring-2"></div>
+                <div class="orb-core">
+                    <span class="gift-emoji">🌸</span>
+                    <span class="date-badge-3d">20/10</span>
+                </div>
+            </div>
+            <div class="shockwave" id="shockwave"></div>
+            <p class="intro-title">Món quà dành riêng cho bạn</p>
+            <p class="intro-subtitle">✨ Chạm vào quả cầu hoa để mở khóa ✨</p>
+        </div>
+    </section>
+
+    <!-- KHÔNG GIAN CHÍNH -->
+    <main id="main-content" class="main-content hidden">
+        <!-- Header -->
+        <header class="hero-header">
+            <div class="hero-badge">✨ HAPPY VIETNAMESE WOMEN'S DAY 20/10 ✨</div>
+            <h1 class="hero-title" id="hero-greeting">Gửi người đặc biệt nhất</h1>
+            <p class="hero-hint">💡 Chạm vào các nút pha lê, lướt ảnh 3D và mở phong thư bên dưới nhé!</p>
+        </header>
+
+        <!-- TASK 4: Thẻ Nhân Vật 3D (3D Tilt Profile Card) -->
+        <section class="profile-section">
+            <div class="profile-card-3d" id="profile-card">
+                <div class="card-glare" id="card-glare"></div>
+
+                <div class="profile-top">
+                    <div class="avatar-3d-wrapper">
+                        <div class="avatar-halo"></div>
+                        <div class="avatar-frame">
+                            <img id="profile-avatar" src="" alt="Avatar người nhận">
+                        </div>
+                        <span class="crown-badge">👑</span>
+                    </div>
+
+                    <div class="profile-identity">
+                        <h2 id="profile-name" class="recipient-name">Tên Người Nhận</h2>
+                        <p id="profile-role" class="recipient-subtitle">Bông hoa rạng rỡ nhất ngày 20/10</p>
+                    </div>
+                </div>
+
+                <!-- 3 Nút Pha Lê Chạm Để Hiện Ra -->
+                <div class="crystal-actions">
+                    <button class="crystal-btn" data-target="panel-tags">
+                        <span class="btn-icon">🌸</span>
+                        <span>Chạm xem Thông tin</span>
+                    </button>
+                    <button class="crystal-btn" data-target="panel-stats">
+                        <span class="btn-icon">💖</span>
+                        <span>Chạm đo Độ xinh</span>
+                    </button>
+                    <button class="crystal-btn" data-target="panel-quote">
+                        <span class="btn-icon">✨</span>
+                        <span>Chạm mở Bí mật</span>
+                    </button>
+                </div>
+
+                <div id="panel-tags" class="reveal-panel">
+                    <div class="tags-grid" id="tags-container"></div>
+                </div>
+
+                <div id="panel-stats" class="reveal-panel">
+                    <div class="stats-list" id="stats-container"></div>
+                </div>
+
+                <div id="panel-quote" class="reveal-panel">
+                    <div class="secret-quote-box">
+                        <span class="quote-mark">“</span>
+                        <p id="secret-quote-text"></p>
+                        <span class="quote-mark end">”</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 5: Album Ảnh 3D Tự Động Scale & Lightbox -->
+        <section class="gallery-section">
+            <div class="section-heading">
+                <span class="section-tag">📸 KHOẢNH KHẮC RẠNG RỠ</span>
+                <h2 class="section-title">Không Gian Kỷ Niệm 3D</h2>
+                <p class="section-desc">Chạm hoặc vuốt sang trái/phải để xoay ảnh • Chạm vào ảnh chính để phóng to</p>
+            </div>
+
+            <div class="carousel-3d-container" id="carousel-3d">
+                <div class="carousel-3d-track" id="carousel-track"></div>
+
+                <!-- Nút điều hướng 3D -->
+                <button class="carousel-nav prev" id="carousel-prev" aria-label="Ảnh trước">❮</button>
+                <button class="carousel-nav next" id="carousel-next" aria-label="Ảnh tiếp">❯</button>
+            </div>
+
+            <div class="carousel-dots" id="carousel-dots"></div>
+        </section>
+
+        <!-- TASK 6.1: Phong Thư 3D Gỡ Niêm Phong Sáp -->
+        <section class="letter-section">
+            <div class="section-heading">
+                <span class="section-tag">💌 ĐÔI LỜI GỬI ĐẾN BẠN</span>
+                <h2 class="section-title">Bức Thư Ngày 20/10</h2>
+            </div>
+
+            <div class="letter-3d-wrapper">
+                <!-- Trạng thái Phong bì khóa niêm phong -->
+                <div class="envelope-sealed" id="envelope-sealed">
+                    <div class="envelope-flap"></div>
+                    <div class="wax-seal-btn" id="open-letter-btn">
+                        <span class="seal-icon">🌺</span>
+                    </div>
+                    <p class="seal-prompt">Chạm vào con dấu hoa hồng để mở thư</p>
+                </div>
+
+                <!-- Trạng thái Bức thư trải mở 3D -->
+                <div class="letter-paper hidden" id="letter-paper">
+                    <div class="paper-decor-top">🌸 ─── ❖ ─── 🌸</div>
+                    <h3 class="letter-salutation" id="letter-title">Gửi bạn,</h3>
+                    <div class="letter-body" id="letter-paragraphs"></div>
+                    <div class="letter-footer">
+                        <div class="letter-stamp">💖 20/10 💖</div>
+                        <div class="letter-signature" id="letter-sign">Người gửi yêu thương</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 6.2: Khu Vườn Bất Ngờ - 3 Thẻ Quà Tặng Lật 3D -->
+        <section class="gifts-section">
+            <div class="section-heading">
+                <span class="section-tag">🎁 ĐẶC QUYỀN NGÀY 20/10</span>
+                <h2 class="section-title">Chạm Để Lật Mở Quà Bất Ngờ</h2>
+                <p class="section-desc">Mỗi tấm thẻ ẩn chứa một đặc quyền dành riêng cho bạn hôm nay!</p>
+            </div>
+
+            <div class="gifts-grid-3d" id="gifts-grid"></div>
+        </section>
+
+        <!-- Nút Đại Tiệc Pháo Hoa Hồng Cuối Trang -->
+        <div class="finale-action">
+            <button id="grand-bloom-btn" class="grand-bloom-btn">
+                <span>💥 Chạm Để Bắn Pháo Hoa Hồng 20/10 💥</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- TASK 5.2: Hộp thoại Lightbox xem ảnh gốc 100% không cắt xén -->
+    <div id="lightbox-modal" class="lightbox-modal hidden">
+        <button id="lightbox-close" class="lightbox-close" aria-label="Đóng">✕</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Ảnh phóng to">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
