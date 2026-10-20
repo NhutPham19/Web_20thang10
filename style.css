@@ -17,20 +17,25 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--bg-gradient);
     color: var(--text-dark);
     min-height: 100vh;
-    overflow-x: hidden;
     position: relative;
 }
 
 #petal-canvas {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 999;
 }
@@ -39,7 +44,7 @@ body {
     display: none !important;
 }
 
-/* Hiệu ứng Gợn Sóng Ánh Sáng GPU siêu mượt khi chạm (Thay thế nổ hoa lag) */
+/* Hiệu ứng Gợn Sóng Ánh Sáng GPU siêu mượt khi chạm */
 .touch-ripple {
     position: fixed;
     width: 16px;
@@ -253,11 +258,11 @@ body {
 /* ================= ĐĨA NHẠC XOAY ================= */
 .music-disc {
     position: fixed;
-    bottom: 22px;
-    right: 22px;
+    bottom: 20px;
+    right: 20px;
     z-index: 600;
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid #fff;
     background: linear-gradient(135deg, #e11d48, #fb7185);
@@ -269,8 +274,8 @@ body {
 }
 
 .disc-inner {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: radial-gradient(circle, #fff 22%, #2a0813 24%, #4a1525 65%, #1f040d 100%);
     display: flex;
@@ -286,36 +291,40 @@ body {
 
 /* ================= BỐ CỤC CHÍNH ================= */
 .main-content {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 36px 18px 90px;
+    padding: 32px 16px 90px;
+    overflow-x: hidden;
     animation: contentEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .hero-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .hero-badge, .section-tag {
     display: inline-block;
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(251, 113, 133, 0.35);
     color: var(--primary);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 1.1px;
+    letter-spacing: 1px;
     margin-bottom: 10px;
     box-shadow: 0 4px 12px rgba(225, 29, 72, 0.06);
+    max-width: 100%;
 }
 
 .hero-title {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
     color: var(--primary);
     text-shadow: 0 4px 14px rgba(225, 29, 72, 0.14);
+    line-height: 1.2;
 }
 
 .section-heading {
@@ -332,11 +341,13 @@ body {
 /* ================= KHỐI 1: THẺ NHÂN VẬT 3D (MƯỢT 60FPS) ================= */
 .profile-section {
     perspective: 1200px;
-    margin-bottom: 52px;
+    margin-bottom: 48px;
+    width: 100%;
 }
 
 .profile-card-3d {
     position: relative;
+    width: 100%;
     background: var(--card-bg);
     border: 2px solid var(--glass-border);
     border-radius: 28px;
@@ -544,6 +555,8 @@ body {
 /* ================= KHỐI 2: ALBUM ẢNH 3D TỰ ĐỘNG SCALE ================= */
 .gallery-section {
     margin-bottom: 56px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .carousel-3d-container {
@@ -555,6 +568,7 @@ body {
     align-items: center;
     justify-content: center;
     touch-action: pan-y;
+    overflow: hidden;
 }
 
 .carousel-3d-track {
@@ -584,7 +598,6 @@ body {
     will-change: transform, opacity;
 }
 
-/* Tự động căn chỉnh mọi kích thước ảnh dọc / ngang / vuông */
 .slide-img-frame {
     position: relative;
     width: 100%;
@@ -776,6 +789,7 @@ body {
 .letter-section {
     margin-bottom: 56px;
     perspective: 1100px;
+    width: 100%;
 }
 
 .letter-3d-wrapper {
@@ -886,6 +900,7 @@ body {
 /* ================= KHỐI 4: 3 MÓN QUÀ Ý NGHĨA & GIÁ TRỊ ================= */
 .gifts-section {
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .gifts-grid-3d {
@@ -1009,46 +1024,74 @@ body {
     100% { opacity: 1; transform: rotateX(0deg) scale(1); }
 }
 
-/* ================= RESPONSIVE TRÊN ĐIỆN THOẠI ================= */
+/* ================= RESPONSIVE TRÊN ĐIỆN THOẠI (ĐÃ FIX LỖI TRÀN LỀ PHẢI) ================= */
 @media (max-width: 768px) {
+    .main-content {
+        padding: 24px 14px 80px;
+    }
+
+    .profile-card-3d {
+        padding: 24px 16px;
+        border-radius: 24px;
+    }
+
     .profile-top {
         flex-direction: column;
         text-align: center;
-        gap: 16px;
+        gap: 14px;
+    }
+
+    .avatar-3d-wrapper {
+        width: 130px;
+        height: 130px;
     }
 
     .crystal-actions {
         grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .carousel-3d-container {
-        height: 375px;
+        height: 360px;
     }
 
     .slide-3d {
-        width: min(275px, 76vw);
-        height: 340px;
+        width: min(260px, 72vw);
+        height: 330px;
     }
 
     .slide-3d.prev-1 {
-        transform: translate3d(-34%, 0, -50px) rotateY(22deg) scale(0.86);
+        transform: translate3d(-22%, 0, -50px) rotateY(18deg) scale(0.86);
     }
 
     .slide-3d.next-1 {
-        transform: translate3d(34%, 0, -50px) rotateY(-22deg) scale(0.86);
+        transform: translate3d(22%, 0, -50px) rotateY(-18deg) scale(0.86);
     }
 
+    /* Thu gọn hoàn toàn slide ẩn vào tâm để không làm dãn màn hình điện thoại */
     .slide-3d.prev-2,
     .slide-3d.next-2 {
+        transform: translate3d(0, 0, -140px) scale(0.5);
         opacity: 0;
         pointer-events: none;
     }
 
     .gifts-grid-3d {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .gift-card-3d {
+        height: 215px;
     }
 
     .letter-paper {
-        padding: 26px 20px;
+        padding: 24px 18px;
+    }
+
+    .letter-footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
     }
 }

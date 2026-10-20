@@ -81,14 +81,14 @@ const CONFIG = {
     gifts: [
         {
             frontTitle: "Món Quà #1",
-            rewardIcon: "🛍️",
-            rewardTitle: "Chuyến Shopping Tự Do",
-            rewardDesc: "Tặng Châu Vi một buổi mua sắm thỏa thích những món đồ em đang yêu thích nhất!"
+            rewardIcon: "✈️",
+            rewardTitle: "Chuyến Du Lịch Về Việt Nam",
+            rewardDesc: "Tặng Châu Vi một chuyến du lịch về Việt Nam thật vui vẻ, ấm áp và ngập tràn kỷ niệm đáng nhớ!"
         },
         {
             frontTitle: "Món Quà #2",
             rewardIcon: "💎",
-            rewardTitle: "Quà Tặng Kỷ Niệm Tinh Tế",
+            rewardTitle: "Quà Tặng Kỷ Niệm",
             rewardDesc: "Một món quà đặc biệt được chuẩn bị riêng để tôn lên vẻ rạng rỡ của em ngày 20/10."
         },
         {
@@ -250,6 +250,7 @@ function init3DTiltCard() {
     const glare = document.getElementById("card-glare");
 
     card.addEventListener("pointermove", (e) => {
+        if (e.pointerType === "touch") return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
