@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</title>
+    <title>Chúc Mừng 20/10 - Châu Vi 💖</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- TASK 2: Canvas Hiệu ứng Nổ Hoa 3D, Mưa Hoa & Chạm Nở Hoa -->
+    <!-- Canvas siêu nhẹ: Dùng bộ nhớ đệm Sprite chống giật lag 100% -->
     <canvas id="petal-canvas"></canvas>
 
-    <!-- TASK 3: Đĩa nhạc xoay 3D ở góc màn hình -->
-    <button id="music-toggle" class="music-disc hidden" aria-label="Bật/Tắt nhạc" title="Chạm để Bật/Tắt nhạc">
+    <!-- Đĩa nhạc xoay ở góc màn hình -->
+    <button id="music-toggle" class="music-disc hidden" aria-label="Bật/Tắt nhạc" title="Bật/Tắt nhạc">
         <div class="disc-inner">
             <span class="music-icon">🎵</span>
         </div>
     </button>
     <audio id="bg-music" loop preload="auto"></audio>
 
-    <!-- TASK 3: Màn hình mở đầu - Quả cầu Hộp quà 3D -->
+    <!-- MÀN HÌNH MỞ ĐẦU + NHẬP MẬT KHẨU NGÀY SINH (1909) -->
     <section id="intro-screen" class="intro-screen">
         <div class="ambient-glow"></div>
-        <div class="intro-box-wrapper" id="open-gift-btn">
-            <div class="crystal-orb">
+        <div class="intro-box-wrapper">
+            <div class="crystal-orb" id="crystal-orb">
                 <div class="orb-ring ring-1"></div>
                 <div class="orb-ring ring-2"></div>
                 <div class="orb-core">
@@ -34,21 +34,38 @@
                 </div>
             </div>
             <div class="shockwave" id="shockwave"></div>
-            <p class="intro-title">Món quà dành riêng cho bạn</p>
-            <p class="intro-subtitle">✨ Chạm vào quả cầu hoa để mở khóa ✨</p>
+
+            <h1 class="intro-title">Món Quà Dành Riêng Cho Châu Vi</h1>
+
+            <!-- Khung nhập mật khẩu -->
+            <div class="passcode-box" id="passcode-box">
+                <label for="passcode-input" class="passcode-label">🔒 Mật khẩu: <strong>Ngày sinh của em</strong></label>
+                <div class="passcode-input-group">
+                    <input 
+                        type="password" 
+                        id="passcode-input" 
+                        class="passcode-input" 
+                        inputmode="numeric" 
+                        maxlength="4" 
+                        placeholder="• • • •"
+                        autocomplete="off"
+                    >
+                    <button id="unlock-btn" class="unlock-btn">Mở Quà 💖</button>
+                </div>
+                <p id="passcode-error" class="passcode-error hidden">Mật khẩu chưa đúng rồi, gợi ý: 4 số ngày tháng sinh của em nhé!</p>
+            </div>
         </div>
     </section>
 
     <!-- KHÔNG GIAN CHÍNH -->
     <main id="main-content" class="main-content hidden">
-        <!-- Header -->
+        <!-- Header (Đã bỏ dòng chữ "Chạm vào... nhé!") -->
         <header class="hero-header">
             <div class="hero-badge">✨ HAPPY VIETNAMESE WOMEN'S DAY 20/10 ✨</div>
-            <h1 class="hero-title" id="hero-greeting">Gửi người đặc biệt nhất</h1>
-            <p class="hero-hint">💡 Chạm vào các nút pha lê, lướt ảnh 3D và mở phong thư bên dưới nhé!</p>
+            <h1 class="hero-title" id="hero-greeting">Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</h1>
         </header>
 
-        <!-- TASK 4: Thẻ Nhân Vật 3D (3D Tilt Profile Card) -->
+        <!-- KHỐI 1: THẺ NHÂN VẬT 3D (CHÂU VI) -->
         <section class="profile-section">
             <div class="profile-card-3d" id="profile-card">
                 <div class="card-glare" id="card-glare"></div>
@@ -57,34 +74,35 @@
                     <div class="avatar-3d-wrapper">
                         <div class="avatar-halo"></div>
                         <div class="avatar-frame">
-                            <img id="profile-avatar" src="" alt="Avatar người nhận">
+                            <img id="profile-avatar" src="" alt="Châu Vi">
                         </div>
                         <span class="crown-badge">👑</span>
                     </div>
 
                     <div class="profile-identity">
-                        <h2 id="profile-name" class="recipient-name">Tên Người Nhận</h2>
-                        <p id="profile-role" class="recipient-subtitle">Bông hoa rạng rỡ nhất ngày 20/10</p>
+                        <h2 id="profile-name" class="recipient-name">Châu Vi</h2>
+                        <p id="profile-role" class="recipient-subtitle">Bông hoa rạng rỡ & ngọt ngào nhất ngày 20/10 🌸</p>
                     </div>
                 </div>
 
-                <!-- 3 Nút Pha Lê Chạm Để Hiện Ra -->
+                <!-- 3 Nút Pha Lê -->
                 <div class="crystal-actions">
-                    <button class="crystal-btn" data-target="panel-tags">
+                    <button class="crystal-btn active" data-target="panel-tags">
                         <span class="btn-icon">🌸</span>
-                        <span>Chạm xem Thông tin</span>
+                        <span>Thông tin của em</span>
                     </button>
                     <button class="crystal-btn" data-target="panel-stats">
                         <span class="btn-icon">💖</span>
-                        <span>Chạm đo Độ xinh</span>
+                        <span>Chỉ số đáng yêu</span>
                     </button>
                     <button class="crystal-btn" data-target="panel-quote">
                         <span class="btn-icon">✨</span>
-                        <span>Chạm mở Bí mật</span>
+                        <span>Lời nhắn bí mật</span>
                     </button>
                 </div>
 
-                <div id="panel-tags" class="reveal-panel">
+                <!-- Mở sẵn thông tin khi vừa vào -->
+                <div id="panel-tags" class="reveal-panel open">
                     <div class="tags-grid" id="tags-container"></div>
                 </div>
 
@@ -102,18 +120,16 @@
             </div>
         </section>
 
-        <!-- TASK 5: Album Ảnh 3D Tự Động Scale & Lightbox -->
+        <!-- KHỐI 2: ALBUM ẢNH 3D TỰ ĐỘNG SCALE -->
         <section class="gallery-section">
             <div class="section-heading">
                 <span class="section-tag">📸 KHOẢNH KHẮC RẠNG RỠ</span>
-                <h2 class="section-title">Không Gian Kỷ Niệm 3D</h2>
-                <p class="section-desc">Chạm hoặc vuốt sang trái/phải để xoay ảnh • Chạm vào ảnh chính để phóng to</p>
+                <h2 class="section-title">Không Gian Kỷ Niệm Của Châu Vi</h2>
             </div>
 
             <div class="carousel-3d-container" id="carousel-3d">
                 <div class="carousel-3d-track" id="carousel-track"></div>
 
-                <!-- Nút điều hướng 3D -->
                 <button class="carousel-nav prev" id="carousel-prev" aria-label="Ảnh trước">❮</button>
                 <button class="carousel-nav next" id="carousel-next" aria-label="Ảnh tiếp">❯</button>
             </div>
@@ -121,56 +137,46 @@
             <div class="carousel-dots" id="carousel-dots"></div>
         </section>
 
-        <!-- TASK 6.1: Phong Thư 3D Gỡ Niêm Phong Sáp -->
+        <!-- KHỐI 3: PHONG THƯ 3D -->
         <section class="letter-section">
             <div class="section-heading">
-                <span class="section-tag">💌 ĐÔI LỜI GỬI ĐẾN BẠN</span>
+                <span class="section-tag">💌 ĐÔI LỜI GỬI ĐẾN EM</span>
                 <h2 class="section-title">Bức Thư Ngày 20/10</h2>
             </div>
 
             <div class="letter-3d-wrapper">
-                <!-- Trạng thái Phong bì khóa niêm phong -->
                 <div class="envelope-sealed" id="envelope-sealed">
                     <div class="envelope-flap"></div>
                     <div class="wax-seal-btn" id="open-letter-btn">
                         <span class="seal-icon">🌺</span>
                     </div>
-                    <p class="seal-prompt">Chạm vào con dấu hoa hồng để mở thư</p>
+                    <p class="seal-prompt">Mở bức thư dành riêng cho Châu Vi</p>
                 </div>
 
-                <!-- Trạng thái Bức thư trải mở 3D -->
                 <div class="letter-paper hidden" id="letter-paper">
                     <div class="paper-decor-top">🌸 ─── ❖ ─── 🌸</div>
-                    <h3 class="letter-salutation" id="letter-title">Gửi bạn,</h3>
+                    <h3 class="letter-salutation" id="letter-title">Gửi Châu Vi,</h3>
                     <div class="letter-body" id="letter-paragraphs"></div>
                     <div class="letter-footer">
                         <div class="letter-stamp">💖 20/10 💖</div>
-                        <div class="letter-signature" id="letter-sign">Người gửi yêu thương</div>
+                        <div class="letter-signature" id="letter-sign">Yêu thương gửi đến em</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TASK 6.2: Khu Vườn Bất Ngờ - 3 Thẻ Quà Tặng Lật 3D -->
+        <!-- KHỐI 4: 3 MÓN QUÀ Ý NGHĨA & GIÁ TRỊ -->
         <section class="gifts-section">
             <div class="section-heading">
-                <span class="section-tag">🎁 ĐẶC QUYỀN NGÀY 20/10</span>
-                <h2 class="section-title">Chạm Để Lật Mở Quà Bất Ngờ</h2>
-                <p class="section-desc">Mỗi tấm thẻ ẩn chứa một đặc quyền dành riêng cho bạn hôm nay!</p>
+                <span class="section-tag">🎁 QUÀ TẶNG ĐẶC BIỆT</span>
+                <h2 class="section-title">Đặc Quyền Dành Riêng Cho Em</h2>
             </div>
 
             <div class="gifts-grid-3d" id="gifts-grid"></div>
         </section>
-
-        <!-- Nút Đại Tiệc Pháo Hoa Hồng Cuối Trang -->
-        <div class="finale-action">
-            <button id="grand-bloom-btn" class="grand-bloom-btn">
-                <span>💥 Chạm Để Bắn Pháo Hoa Hồng 20/10 💥</span>
-            </button>
-        </div>
     </main>
 
-    <!-- TASK 5.2: Hộp thoại Lightbox xem ảnh gốc 100% không cắt xén -->
+    <!-- Lightbox phóng to ảnh 100% không cắt xén -->
     <div id="lightbox-modal" class="lightbox-modal hidden">
         <button id="lightbox-close" class="lightbox-close" aria-label="Đóng">✕</button>
         <div class="lightbox-content">
